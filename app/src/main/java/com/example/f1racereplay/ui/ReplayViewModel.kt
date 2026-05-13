@@ -14,10 +14,22 @@ class ReplayViewModel(private val repository: F1Repository) : ViewModel() {
     var currentPositions = mutableStateListOf<CarLocation>()
         private set
 
+    var minX = 0.0
+    var maxX = 0.0
+    var minY = 0.0
+    var maxY = 0.0
     fun startRaceReplay(driverNumber: Int) {
         viewModelScope.launch {
             // 1. Fetch the data from the back-end we built
             val telemetry = repository.getTelemetryForDriver(driverNumber)
+
+            // Calculate the bounding box of the track
+            if (telemetry.isNotEmpty()) {
+                minX = telemetry.minOf { it.x }
+                maxX = telemetry.maxOf { it.x }
+                minY = telemetry.minOf { it.y }
+                maxY = telemetry.maxOf { it.y }
+            }
 
             // 2. Play through the telemetry points
             for (point in telemetry) {
