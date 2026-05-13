@@ -6,11 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.f1racereplay"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.f1racereplay"
@@ -66,4 +62,5 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.serialization)
+    implementation(libs.okhttp)
 }
