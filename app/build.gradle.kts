@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -55,4 +56,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    // Retrofit for networking
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Kotlin Serialization for JSON parsing
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    // Coroutines for background tasks
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.serialization)
 }
