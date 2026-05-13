@@ -17,3 +17,8 @@ data class Driver(
     val team_name: String,
     val team_colour: String
 )
+@Serializable
+data class RaceState(
+    val timestamp: String,
+    val carPositions: Map<Int, CarLocation> // Key is driver_number
+)
