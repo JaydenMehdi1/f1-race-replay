@@ -11,22 +11,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.f1racereplay.ui.theme.F1RaceReplayTheme
+import com.example.f1racereplay.data.F1Repository
+import com.example.f1racereplay.data.RetrofitClient
+import com.example.f1racereplay.ui.ReplayViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            F1RaceReplayTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+
+        // Manual setup for now
+        val apiService = RetrofitClient.instance
+        val repository = F1Repository(apiService)
+        val viewModel = ReplayViewModel(repository)
+
+        // Start the replay for a specific driver (e.g., 44 for Hamilton)
+        viewModel.startRaceReplay(44)
+
+
     }
 }
 
@@ -41,7 +42,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    F1RaceReplayTheme {
-        Greeting("Android")
-    }
+
 }
